@@ -1,6 +1,21 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
-let isLoggedIn = false;
+import { useCookies } from 'vue3-cookies'
+import { decodeCredential, googleLogout } from 'vue3-google-login'
+import { ref, onMounted } from 'vue';
+
+const { cookies } = useCookies()
+
+const isLoggedIn = ref(false)
+let userName = ref('')
+
+const checkSession = () => {
+    if(cookies.isKey('user_session')) {
+        isLoggedIn.value = true
+    }
+}
+
+onMounted(checkSession)
 </script>
 
 <template>
@@ -10,13 +25,15 @@ let isLoggedIn = false;
     
     <nav>
         <ul>
-            <li><RouterLink to="/">Book</RouterLink></li>
-            <li><RouterLink to="/about">Test</RouterLink></li>
+            <li><RouterLink to="/new">Book Session</RouterLink></li>
+            <li v-if="isLoggedIn"><RouterLink to="/bookings">My Bookings</RouterLink></li>
+            <li v-if="isLoggedIn"><RouterLink to="/athletes">My Athletes</RouterLink></li>
             <li v-if="!isLoggedIn" class="login"><RouterLink to="/login">Login<span class="material-symbols-outlined">Login</span></RouterLink></li>
+            <li v-if="isLoggedIn" class="login"><RouterLink to="/login">Logout<span class="material-symbols-outlined">Logout</span></RouterLink></li>
         </ul>
     </nav>
 </template>
-
+s
 <style scoped>
 
 nav {

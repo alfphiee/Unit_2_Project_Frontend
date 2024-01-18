@@ -14,14 +14,16 @@ const callback = (response) => {
     const userData = decodeCredential(response.credential)
     userName = userData.given_name
     cookies.set('user_session', response.credential)
-    console.log(userData)
     fetch(`${import.meta.env.VITE_API_URL}/users/`, {
         method: 'POST',
         headers: {
             "Content-Type": "application/json"
         },
         body : JSON.stringify({
-            email: userData.email
+            email: userData.email,
+            profileInfo: {
+                fullName: userName
+            }
         })
 
     })

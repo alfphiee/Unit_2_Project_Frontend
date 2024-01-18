@@ -22,7 +22,6 @@ const validateBooking = () => {
 }
 
 const submitBooking = async() => {
-    console.log(booking.value)
     validateBooking()
     if (formErrors.value.length === 0) {
         try {

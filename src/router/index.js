@@ -1,8 +1,14 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import LoginView from '@/views/LoginView.vue'
-import NewBookingView from '@/views/NewBookingView.vue'
-import BookingView from '@/views/BookingView.vue'
+
+import AthleteListView from '@/views/Athletes/AthleteListView.vue'
+
+import NewBookingView from '@/views/Bookings/NewBookingView.vue'
+import ConfirmedBookingView from '@/views/Bookings/ConfirmedBookingView.vue'
+import CompletedBookingView from '@/views/Bookings/CompletedBookingView.vue'
+import PendingBookingView from '@/views/Bookings/PendingBookingView.vue'
+import SingleBookingView from '@/views/Bookings/SingleBookingView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -31,10 +37,14 @@ const router = createRouter({
       component: NewBookingView
     },
     {
-      path: '/booking',
-      name: 'booking',
-      component: BookingView
-    }
+      path: '/bookings',
+      name: 'bookings',
+      component: ConfirmedBookingView
+    },
+    { path: '/bookings/complete', component: CompletedBookingView },
+    { path: '/bookings/pending', component: PendingBookingView },
+    { path: '/bookings/:coachId/:bookingId', component: SingleBookingView },
+    { path: '/athletes', component: AthleteListView }
   ]
 })
 
