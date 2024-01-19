@@ -31,7 +31,7 @@ const callback = (response) => {
         })
 
     })
-    .then(() => router.push('/'))
+    .then(() => location.reload())
 }
 
 const checkSession = () => {
