@@ -1,5 +1,8 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
 const booking = ref({
     coachId: '',
     athleteContact: '',
@@ -10,6 +13,16 @@ const booking = ref({
     notes: '',
     status: 'pending',
 })
+
+let coaches = ref([])
+
+const fetchData = () => {
+    fetch(`${import.meta.env.VITE_API_URL}/users`)
+    .then((response) => response.json())
+    .then((data) => coaches.value = data)
+}
+
+onMounted(fetchData)
 
 const formErrors = ref([])
 
@@ -35,6 +48,7 @@ const submitBooking = async() => {
             if(!response.ok) {
                 throw new Error('Network response not ok')
             }
+            router.push('/success')
         } catch (err) {
             console.error(err)
         }
@@ -44,21 +58,42 @@ const submitBooking = async() => {
 
 <template>
 <h3>Create new Booking</h3>
-<form @submit.prevent="submitBooking">
-    <label for="coachId">Coach:</label>
-    <input type="text" id="coachId" placeholder="Coach" v-model="booking.coachId" required>
-    <label for="athleteContact">athleteContact:</label>
-    <input type="email" id="athleteContact" placeholder="name@example.com" v-model="booking.athleteContact" required>
-    <label for="date">Date:</label>
-    <input type="date" id="date" v-model="booking.date" required>
-    <label for="duration">Duration (in minutes):</label>
-    <input type="number" id="duration" placeholder="60" v-model="booking.duration" required>
-    <label for="type">Type of Session:</label>
-    <input type="text" id="type" placeholder="Fitness" v-model="booking.type" required>
-    <label for="location">Location:</label>
-    <input type="text" id="location" placeholder="Address of Location" v-model="booking.location" required>
-    <label for="notes">Notes</label>
-    <input type="text" id="notes" placeholder="Additional Info" v-model="booking.notes">
-    <button type="submit">Submit Booking</button>
+<form class="row g-3" @submit.prevent="submitBooking">
+    <div class="col-md-6">
+        <label class="form-label" for="coachId">Coach:</label>
+        <select class="form-control" id="coachId" v-model="booking.coachId" required>
+            <option disabled value="">Select a coach</option>
+            <option v-for="coach in coaches" :key="coach._id" :value="coach._id">
+                {{ coach.profileInfo.fullName }}
+            </option>
+        </select>
+    </div>
+    <div class="col-md-6">
+        <label class="form-label" for="athleteContact">Athlete Contact:</label>
+        <input class="form-control" type="email" id="athleteContact" placeholder="name@example.com" v-model="booking.athleteContact" required>
+    </div>
+    <div class="col-md-3">
+        <label class="form-label" for="date">Date:</label>
+        <input class="form-control" type="date" id="date" v-model="booking.date" required>
+    </div>
+    <div class="col-md-3">
+        <label class="form-label" for="duration">Duration (in minutes):</label>
+        <input class="form-control" type="number" id="duration" placeholder="60" v-model="booking.duration" required>
+    </div>
+    <div class="col-md-6">
+        <label class="form-label" for="type">Type of Session:</label>
+        <input class="form-control" type="text" id="type" placeholder="Fitness" v-model="booking.type" required>
+    </div>
+    <div class="col-md-6">
+        <label class="form-label" for="location">Location:</label>
+        <input class="form-control" type="text" id="location" placeholder="Address of Location" v-model="booking.location" required>
+    </div>
+    <div class="col-md-6">
+        <label class="form-label" for="notes">Notes</label>
+        <input class="form-control" type="text" id="notes" placeholder="Additional Info" v-model="booking.notes">
+    </div>
+    <div class="col-md-3">
+    <button class="btn btn-primary" type="submit">Submit Booking</button>
+</div>
 </form>
 </template>

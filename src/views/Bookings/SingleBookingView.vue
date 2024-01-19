@@ -21,5 +21,7 @@ onMounted(fetchData)
 
 
 <template>
-<h3>{{ formatDate(booking.date) }}</h3>
+<h3>{{ formatDate(booking.date) }} - {{ booking.athleteContact }}</h3>
+<h4>Current Status: {{ booking.status }}</h4>
+<p></p>
 </template>

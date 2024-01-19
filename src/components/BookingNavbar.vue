@@ -7,7 +7,7 @@ import { RouterLink, RouterView } from 'vue-router'
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     </head>
     
-    <nav>
+    <nav id="booking-nav">
         <ul>
             <li><RouterLink to="/bookings/pending">Pending</RouterLink></li>
             <li><RouterLink to="/bookings">Confirmed</RouterLink></li>

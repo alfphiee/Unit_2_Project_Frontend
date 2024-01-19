@@ -3,10 +3,19 @@
 body {
   margin: 0;
   box-sizing: border-box;
-  padding: 0;
   font-family: 'Open Sans', sans-serif;
+}
+
+main {
+  padding: 1rem;
+}
+
+#booking-nav {
+  margin-left: -1rem;
+  width: calc(100% + 20px);
 }
 
 .booking {
   margin-top: 5rem;
 }
+

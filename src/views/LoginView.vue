@@ -14,6 +14,7 @@ const callback = (response) => {
     const userData = decodeCredential(response.credential)
     userName = userData.given_name
     cookies.set('user_session', response.credential)
+    console.log(userName)
     fetch(`${import.meta.env.VITE_API_URL}/users/`, {
         method: 'POST',
         headers: {
@@ -27,6 +28,7 @@ const callback = (response) => {
         })
 
     })
+    window.location.reload()
 }
 
 const checkSession = () => {
@@ -37,22 +39,24 @@ const checkSession = () => {
     }
 }
 
-const handleLogout = () => {
-    googleLogout()
-    cookies.remove('user_session')
-    isLoggedIn.value = false
-}
-
 onMounted(checkSession)
 </script>
 
 <template>
-    <h1>Login</h1>
     <div v-if="isLoggedIn">
-        <h2>Hello {{  userName }}</h2>
-        <button @click="handleLogout">Logout</button>
+        <div class="d-flex justify-content-center align-items-center" style="height: 100vh">
+        <div class="text-center">
+        <h3>Welcome {{ userName }}</h3>
+        </div>
+        </div>
     </div>
     <div v-else>
+        <div class="d-flex justify-content-center align-items-center" style="height: 100vh">
+        <div class="text-center">
+        <h3>Login to manage Coaching Sessions</h3>
         <GoogleLogin :callback="callback"/>
+        </div>
+    </div>
+        
     </div>
 </template>

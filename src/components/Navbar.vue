@@ -29,7 +29,7 @@ onMounted(checkSession)
             <li v-if="isLoggedIn"><RouterLink to="/bookings">My Bookings</RouterLink></li>
             <li v-if="isLoggedIn"><RouterLink to="/athletes">My Athletes</RouterLink></li>
             <li v-if="!isLoggedIn" class="login"><RouterLink to="/login">Login<span class="material-symbols-outlined">Login</span></RouterLink></li>
-            <li v-if="isLoggedIn" class="login"><RouterLink to="/login">Logout<span class="material-symbols-outlined">Logout</span></RouterLink></li>
+            <li v-if="isLoggedIn" class="login"><RouterLink to="/profile">My Profile<span class="material-symbols-outlined">Person</span></RouterLink></li>
         </ul>
     </nav>
 </template>
@@ -43,6 +43,7 @@ nav {
     width: 100%;
     height: 5rem;
     position: fixed;
+    z-index: 999999999;
 }
 
  ul {

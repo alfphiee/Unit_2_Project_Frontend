@@ -41,9 +41,10 @@ onMounted(() => {
 </script>
 
 <template>
-    <ul>
-        <li v-for="athlete in athletes" :key="athlete.id">
-            {{ athlete.email }}
+    <h3>Athletes</h3>
+    <ul class="list-group">
+        <li class="list-group-item" v-for="athlete in athletes" :key="athlete.id">
+            <RouterLink :to="`/athletes/${userId}/${athlete._id}`">{{ athlete.email }}</RouterLink>
         </li>
     </ul>
 

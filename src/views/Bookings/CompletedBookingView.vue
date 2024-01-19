@@ -74,12 +74,15 @@ const cancelBooking = (booking) => {
 <BookingNavbar />
 <div class="booking">
     <h3>Completed Bookings:</h3>
-    <ul>
-        <li v-for="booking in bookings" :key="booking.id">
-        <p>{{ formatDate(booking.date) }}</p>
-        <button @click="completeBooking(booking)">Pending</button>
-        <button @click="cancelBooking(booking)">Cancel</button>
-        </li>
-    </ul>
-</div>
+    <div class="card" v-for="booking in bookings" :key="booking.id">
+        <div class="card-body">
+        <h5 class="card-title">{{ formatDate(booking.date) }} - {{ booking.athleteId.email }}</h5>
+                <h6 class="card-subtitle">Location: {{ booking.location }}</h6>
+                <p class="card-text">Duration: {{ booking.duration }}m</p>
+                <p class="card-text">Type: {{ booking.type }}</p>
+            <RouterLink class="m-1 btn btn-secondary" :to="`/bookings/${booking.coachId}/${booking._id}/notes`">View Notes</RouterLink>
+            <button class="m-1 btn btn-danger" @click="cancelBooking(booking)">Cancel</button>
+            </div>
+            </div>
+            </div>
 </template>

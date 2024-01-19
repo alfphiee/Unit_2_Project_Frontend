@@ -75,12 +75,15 @@ const cancelBooking = (booking) => {
     <div class="booking">
         
         <h3>Confirmed Bookings:</h3>
-        <ul>
-            <li v-for="booking in bookings" :key="booking.id">
-            <p>{{ formatDate(booking.date) }}</p>
-            <button @click="completeBooking(booking)">Completed</button>
-            <button @click="cancelBooking(booking)">Cancel</button>
-            </li>
-        </ul>
+        <div class="card" v-for="booking in bookings" :key="booking.id">
+        <div class="card-body">
+            <h5 class="card-title">{{ formatDate(booking.date) }} - {{ booking.athleteId.email }}</h5>
+            <h6 class="card-subtitle">Location: {{ booking.location }}</h6>
+                <p class="card-text">Duration: {{ booking.duration }}m</p>
+                <p class="card-text">Type: {{ booking.type }}</p>
+                <button class="m-1 btn btn-success" @click="completeBooking(booking)">Completed</button>
+            <button class="m-1 btn btn-danger" @click="cancelBooking(booking)">Cancel</button>
+            </div>
+            </div>
     </div>
 </template>
