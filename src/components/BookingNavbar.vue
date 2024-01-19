@@ -25,6 +25,7 @@ nav {
     width: 100%;
     height: 5rem;
     position: fixed;
+    z-index: 99;
 }
 
  ul {
