@@ -23,6 +23,7 @@ const handleLogout = () => {
     cookies.remove('user_session')
     isLoggedIn.value = false
     router.push('/login')
+    location.reload()
 }
 
 const message = ref('')
