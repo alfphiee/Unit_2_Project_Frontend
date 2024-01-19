@@ -22,8 +22,9 @@ const handleLogout = () => {
     googleLogout()
     cookies.remove('user_session')
     isLoggedIn.value = false
-    location.reload()
-    router.push('/login')
+    router.push('/login').then(() => {
+        location.reload();
+    });
 }
 
 const message = ref('')
