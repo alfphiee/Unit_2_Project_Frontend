@@ -22,8 +22,8 @@ const handleLogout = () => {
     googleLogout()
     cookies.remove('user_session')
     isLoggedIn.value = false
-    router.push('/login')
     location.reload()
+    router.push('/login')
 }
 
 const message = ref('')
