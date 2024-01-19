@@ -25,6 +25,7 @@ onMounted(checkSession)
     
     <nav>
         <ul>
+            <li><RouterLink to="/">Home</RouterLink></li>
             <li><RouterLink to="/new">Book Session</RouterLink></li>
             <li v-if="isLoggedIn"><RouterLink to="/bookings">My Bookings</RouterLink></li>
             <li v-if="isLoggedIn"><RouterLink to="/athletes">My Athletes</RouterLink></li>
