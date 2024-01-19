@@ -2,8 +2,11 @@
 import { useCookies } from 'vue3-cookies'
 import { decodeCredential, googleLogout } from 'vue3-google-login'
 import { onMounted, ref } from 'vue'
+import { useRouter } from 'vue-router';
 
 const { cookies } = useCookies()
+
+const router = useRouter()
 
 
 let isLoggedIn = ref(false)
@@ -28,7 +31,7 @@ const callback = (response) => {
         })
 
     })
-    window.location.reload()
+    .then(() => router.push('/'))
 }
 
 const checkSession = () => {
@@ -44,14 +47,14 @@ onMounted(checkSession)
 
 <template>
     <div v-if="isLoggedIn">
-        <div class="d-flex justify-content-center align-items-center" style="height: 100vh">
+        <div class="d-flex justify-content-center align-items-center" style="height: 60vh">
         <div class="text-center">
         <h3>Welcome {{ userName }}</h3>
         </div>
         </div>
     </div>
     <div v-else>
-        <div class="d-flex justify-content-center align-items-center" style="height: 100vh">
+        <div class="d-flex justify-content-center align-items-center" style="height: 60vh">
         <div class="text-center">
         <h3>Login to manage Coaching Sessions</h3>
         <GoogleLogin :callback="callback"/>

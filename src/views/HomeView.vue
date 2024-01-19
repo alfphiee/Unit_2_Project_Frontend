@@ -23,6 +23,17 @@ onMounted(() => {
 
 <template>
   <main>
-    <h1 v-if="isLoggedIn">You're logged in</h1>
+    <div v-if="isLoggedIn" class="d-flex justify-content-center align-items-center" style="height: 60vh">
+        <div class="text-center">
+        <h3>Welcome to Coach Tracker</h3>
+        <h4>The aim of this site is to help you manage your individual bookings & athletes all in one place</h4>
+        </div>
+    </div>
+    <div v-else class="d-flex justify-content-center align-items-center" style="height: 60vh">
+        <div class="text-center">
+        <h3>Welcome to Coach Tracker</h3>
+        <h4>As a Non signed in User you are able to make Bookings with a Coach</h4>
+        </div>
+    </div>
   </main>
 </template>
